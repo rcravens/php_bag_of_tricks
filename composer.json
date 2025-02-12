@@ -14,5 +14,7 @@
             "email": "bob.cravens@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php"                               : "^8.2"
+    }
 }
