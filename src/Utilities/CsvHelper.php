@@ -20,8 +20,6 @@ class CsvHelper
 
 	public static function with( string|null $csv ): CsvHelper
 	{
-		throw new \Exception( 'test' );
-
 		return new self( $csv );
 	}
 
