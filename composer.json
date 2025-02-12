@@ -1,0 +1,18 @@
+{
+    "name": "rcravens/php_bag_of_tricks",
+    "description": "A package of reusable classes, helpers, and other PHP code.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cravens\\Php\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rcravens",
+            "email": "bob.cravens@gmail.com"
+        }
+    ],
+    "require": {}
+}
