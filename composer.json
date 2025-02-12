@@ -8,6 +8,11 @@
             "Cravens\\Php\\": "src/"
         }
     },
+    "autoload-dev"     : {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "rcravens",
@@ -16,5 +21,16 @@
     ],
     "require": {
         "php"                               : "^8.2"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.7"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install"  : "dist",
+        "sort-packages"      : true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }

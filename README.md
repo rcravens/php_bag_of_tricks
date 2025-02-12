@@ -7,6 +7,7 @@ Checklist:
 [x] Review a few existing packages
 
 [x] Set package structure:
+
 - src directory
 - vendor directory
 - composer.json
@@ -15,9 +16,9 @@ Checklist:
 
 [x] Configure autoloading & other options
 
-[ ] Adding code
+[x] Adding code
 
-[ ] Adding tests
+[x] Adding tests
 
 [ ] Publish to Packagist
 
