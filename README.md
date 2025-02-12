@@ -13,7 +13,7 @@ Checklist:
 - LICENSE
 - README.md
 
-[ ] Configure autoloading & other options
+[x] Configure autoloading & other options
 
 [ ] Adding code
 
