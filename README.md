@@ -4,9 +4,9 @@ Checklist:
 
 [x] Create and configure a 'composer.json' file with composer init
 
-[ ] Review a few existing packages
+[x] Review a few existing packages
 
-[ ] Set package structure:
+[x] Set package structure:
 - src directory
 - vendor directory
 - composer.json
