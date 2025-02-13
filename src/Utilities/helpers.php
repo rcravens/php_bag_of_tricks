@@ -1,7 +1,7 @@
 <?php
 
 use Cravens\Php\Utilities\AlertHelper;
-use Cravens\Php\Utilities\I18nHelper;
+use Cravens\Php\Utilities\I18n\I18nHelper;
 
 
 if ( ! function_exists( 'cost' ) )
