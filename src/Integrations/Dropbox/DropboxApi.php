@@ -45,7 +45,7 @@ class DropboxApi
 		}
 	}
 
-	public function get_access_token( $refresh_token ): GenericResult
+	public function get_access_token( string $refresh_token ): GenericResult
 	{
 		try
 		{
