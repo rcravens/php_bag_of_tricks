@@ -2,12 +2,16 @@
 
 namespace Cravens\Php\Ai\OpenAi;
 
+use Carbon\Carbon;
 use Cravens\Php\Ai\LlmInterface;
 use Cravens\Php\Ai\PromptBuilder;
+use Cravens\Php\Traits\CachableTrait;
 use OpenAI;
 
 class OpenAiLlm implements LlmInterface
 {
+	use CachableTrait;
+
 	private string $api_key;
 
 	public function __construct( string $open_ai_api_key )
@@ -18,11 +22,7 @@ class OpenAiLlm implements LlmInterface
 	public function get_response( PromptBuilder $prompt ): string
 	{
 		$key      = md5( serialize( $prompt->messages() ) );
-		$response = null;
-		if ( function_exists( 'cache' ) )
-		{
-			$response = cache()->has( $key ) ? cache()->get( $key ) : null;
-		}
+		$response = self::cache_get_value( $key );
 
 		if ( is_null( $response ) )
 		{
@@ -34,10 +34,7 @@ class OpenAiLlm implements LlmInterface
 
 			$response = $chat_reply->choices[ 0 ]->message->content;
 
-			if ( function_exists( 'cache' ) )
-			{
-				cache()->put( $key, $response, now()->addMinutes( 60 ) );
-			}
+			self::cache_set_value( $key, $response, Carbon::now()->addMinutes( 60 ) );
 		}
 
 		return $response;

@@ -3,9 +3,12 @@
 namespace Cravens\Php\Utilities;
 
 use Carbon\Carbon;
+use Cravens\Php\Traits\CachableTrait;
 
 class GeoLocationHelper
 {
+	use CachableTrait;
+
 	private const GOOGLE_API_BASE_URL = 'https://maps.googleapis.com/maps/api';
 	private string $api_key;
 
@@ -34,7 +37,7 @@ class GeoLocationHelper
 		$address = $street1 . ', ' . $city . ' ' . $state . ' ' . $country;
 
 		$key   = 'get_lat_lng_google_api|' . $address;
-		$value = $this->cached_value( $key );
+		$value = self::cache_get_value( $key );
 		if ( is_null( $value ) )
 		{
 			try
@@ -49,7 +52,7 @@ class GeoLocationHelper
 					$value->latitude  = $data[ 'results' ][ 0 ][ 'geometry' ][ 'location' ][ 'lat' ];
 					$value->longitude = $data[ 'results' ][ 0 ][ 'geometry' ][ 'location' ][ 'lng' ];
 
-					$this->add_to_cache( $key, $value );
+					self::cache_set_value( $key, $value, Carbon::now()->addMinutes( 60 ) );
 				}
 			}
 			catch( \Exception $e )
@@ -64,8 +67,7 @@ class GeoLocationHelper
 	private function get_address_google_api( $lat, $lng ): ?\stdClass
 	{
 		$key   = 'address_from_lat_lng|' . $lat . '|' . $lng;
-		$value = $this->cached_value( $key );
-
+		$value = self::cache_get_value( $key );
 		if ( is_null( $value ) )
 		{
 			try
@@ -124,7 +126,7 @@ class GeoLocationHelper
 						}
 					}
 
-					$this->add_to_cache( $key, $value );
+					self::cache_set_value( $key, $value, Carbon::now()->addMinutes( 60 ) );
 				}
 			}
 			catch( \Exception $e )
@@ -141,7 +143,7 @@ class GeoLocationHelper
 		$value = null;
 
 		$key   = 'get_directions_google_api|' . $from_address . '|' . $to_address;
-		$value = $this->cached_value( $key );
+		$value = self::cache_get_value( $key );
 
 		if ( is_null( $value ) )
 		{
@@ -175,7 +177,7 @@ class GeoLocationHelper
 						$value->steps[] = $obj;
 					}
 
-					$this->add_to_cache( $key, $value );
+					self::cache_set_value( $key, $value, Carbon::now()->addMinutes( 60 ) );
 				}
 			}
 			catch( \Exception $e )
@@ -185,23 +187,5 @@ class GeoLocationHelper
 		}
 
 		return $value;
-	}
-
-	private function cached_value( $key )
-	{
-		if ( ! function_exists( 'cache' ) )
-		{
-			return null;
-		}
-
-		return cache()->has( $key ) ? cache()->get( $key ) : null;
-	}
-
-	private function add_to_cache( $key, $value, $timeout_minutes = 60 )
-	{
-		if ( function_exists( 'cache' ) )
-		{
-			cache()->put( $key, $value, Carbon::now()->addMinutes( $timeout_minutes ) );
-		}
 	}
 }

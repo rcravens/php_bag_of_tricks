@@ -3,10 +3,13 @@
 namespace Cravens\Php\Utilities;
 
 use Carbon\Carbon;
+use Cravens\Php\Traits\CachableTrait;
 use Exception;
 
 class WeatherHelper
 {
+	use CachableTrait;
+
 	private const BASE_URL = 'https://api.openweathermap.org/data/2.5/';
 	private string $api_key;
 	private string $language;
@@ -22,11 +25,8 @@ class WeatherHelper
 	public function daily_forecast_by_lat_lng( $lat, $lng )
 	{
 		$key   = 'weather_forecast|' . $lat . '|' . $lng;
-		$value = null;
-		if ( function_exists( 'cache' ) )
-		{
-			$value = cache()->has( $key ) ? cache()->get( $key ) : null;
-		}
+		$value = self::cache_get_value( $key );
+
 		if ( is_null( $value ) )
 		{
 			try
@@ -34,10 +34,7 @@ class WeatherHelper
 				$url   = self::BASE_URL . 'forecast?lat=' . $lat . '&lon=' . $lng . '&appid=' . $this->api_key . '&units=' . $this->unit . '&lang=' . $this->language;
 				$value = file_get_contents( $url );
 
-				if ( function_exists( 'cache' ) )
-				{
-					cache()->put( $key, $value, Carbon::now()->addMinutes( 60 ) );
-				}
+				self::cache_set_value( $key, $value, Carbon::now()->addMinutes( 60 ) );
 			}
 			catch( Exception $e )
 			{

@@ -2,8 +2,13 @@
 
 namespace Cravens\Php\Utilities\I18n;
 
+use Carbon\Carbon;
+use Cravens\Php\Traits\CachableTrait;
+
 class I18nHelper
 {
+	use CachableTrait;
+
 	public static function currency_codes(): array
 	{
 		return array_keys( get_object_vars( self::currencies() ) );
@@ -29,31 +34,36 @@ class I18nHelper
 
 	public static function currencies()
 	{
-		$key = 'i18n_currencies';
-		if ( ! cache()->has( $key ) )
+		$key  = 'i18n_currencies';
+		$data = self::cache_get_value( $key );
+		if ( is_null( $data ) )
 		{
 			$raw = file_get_contents( __DIR__ . '/currencies.json' );
 
 			$data = json_decode( $raw );
-			cache()->put( $key, $data, now()->addDay() );
+
+			self::cache_set_value( $key, $data, Carbon::now()->addDay() );
 		}
 
-		return cache()->get( $key );
+		return $data;
 	}
 
 	public static function countries()
 	{
-		$key = 'i18n_countries';
-		if ( ! cache()->has( $key ) )
+		$key       = 'i18n_countries';
+		$countries = self::cache_get_value( $key );
+
+		if ( ! is_null( $countries ) )
 		{
 			$raw = file_get_contents( __DIR__ . '/countries.json' );
 			$raw = preg_replace( '/^\xEF\xBB\xBF/', '', $raw );
 
 			$countries = json_decode( $raw );
-			cache()->put( $key, $countries, now()->addDay() );
+
+			self::cache_set_value( $key, $countries, Carbon::now()->addDay() );
 		}
 
-		return cache()->get( $key );
+		return $countries;
 	}
 
 	public static function country_by_code( $code ): ?object
