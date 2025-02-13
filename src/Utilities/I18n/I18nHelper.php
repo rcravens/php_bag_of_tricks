@@ -1,6 +1,6 @@
 <?php
 
-namespace Cravens\Php\Utilities;
+namespace Cravens\Php\Utilities\I18n;
 
 class I18nHelper
 {
