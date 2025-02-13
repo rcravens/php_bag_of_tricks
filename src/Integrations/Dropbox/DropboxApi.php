@@ -4,7 +4,6 @@ namespace Cravens\Php\Integrations\Dropbox;
 
 use Cravens\Php\Utilities\GenericResult;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Http;
 
 class DropboxApi
 {
