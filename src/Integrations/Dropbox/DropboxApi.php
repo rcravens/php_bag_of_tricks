@@ -35,7 +35,7 @@ class DropboxApi
 				],
 			] );
 
-			$data = json_decode( $response->getBody(), true );
+			$data = json_decode( $response->getBody(), false );
 
 			return GenericResult::data( $data );
 		}
@@ -59,7 +59,7 @@ class DropboxApi
 				],
 			] );
 
-			$data = json_decode( $response->getBody(), true );
+			$data = json_decode( $response->getBody(), false );
 
 			return GenericResult::data( $data );
 		}
