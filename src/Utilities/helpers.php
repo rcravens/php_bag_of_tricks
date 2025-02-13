@@ -2,6 +2,7 @@
 
 use Cravens\Php\Utilities\AlertHelper;
 use Cravens\Php\Utilities\I18n\I18nHelper;
+use Cravens\Php\Utilities\Translate;
 
 if ( ! function_exists( '__x' ) )
 {
