@@ -26,4 +26,9 @@ class UrlHelper
 
 		return $base_url . '?' . $new_query_string;
 	}
+
+	public static function normalize( string $url ): string
+	{
+		return preg_replace( '/\b\d+\b/', ':id', $url );
+	}
 }
