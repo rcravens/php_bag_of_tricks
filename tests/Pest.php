@@ -1,5 +1,9 @@
 <?php
 
+
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . '/../' );
+$dotenv->safeLoad();
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -24,9 +28,9 @@
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
+expect()->extend( 'toBeOne', function () {
+	return $this->toBe( 1 );
+} );
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +45,5 @@ expect()->extend('toBeOne', function () {
 
 function something()
 {
-    // ..
+	// ..
 }
