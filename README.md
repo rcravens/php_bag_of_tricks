@@ -1,26 +1,3 @@
-Checklist:
+# Bob's Bag of Tricks
 
-[x] Initialize a Git repo with Github remote
-
-[x] Create and configure a 'composer.json' file with composer init
-
-[x] Review a few existing packages
-
-[x] Set package structure:
-
-- src directory
-- vendor directory
-- composer.json
-- LICENSE
-- README.md
-
-[x] Configure autoloading & other options
-
-[x] Adding code
-
-[x] Adding tests
-
-[ ] Publish to Packagist
-
-[ ] Using the new package in a project
-
+I find that the code in the src directory is useful in many projects. This package / library is intended to prevent copy/paste of this code. In addition, this library becomes the "master copy" of the code.
