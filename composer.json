@@ -1,36 +1,39 @@
 {
-    "name": "rcravens/php_bag_of_tricks",
-    "description": "A package of reusable classes, helpers, and other PHP code.",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Cravens\\Php\\": "src/"
-        }
+  "name"        : "rcravens/php_bag_of_tricks",
+  "description" : "A package of reusable classes, helpers, and other PHP code.",
+  "type"        : "library",
+  "license"     : "MIT",
+  "autoload"    : {
+    "psr-4": {
+      "Cravens\\Php\\": "src/"
     },
-    "autoload-dev"     : {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "authors": [
-        {
-            "name": "rcravens",
-            "email": "bob.cravens@gmail.com"
-        }
-    ],
-    "require": {
-        "php"                               : "^8.2"
-    },
-    "require-dev": {
-        "pestphp/pest": "^3.7"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install"  : "dist",
-        "sort-packages"      : true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+    "files": [
+      "src/Utilities/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
+  },
+  "authors"     : [
+    {
+      "name" : "rcravens",
+      "email": "bob.cravens@gmail.com"
+    }
+  ],
+  "require"     : {
+    "php": "^8.2"
+  },
+  "require-dev" : {
+    "pestphp/pest": "^3.7"
+  },
+  "config"      : {
+    "optimize-autoloader": true,
+    "preferred-install"  : "dist",
+    "sort-packages"      : true,
+    "allow-plugins"      : {
+      "pestphp/pest-plugin": true
+    }
+  }
 }
