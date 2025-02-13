@@ -23,11 +23,12 @@
     }
   ],
   "require"     : {
-    "php"              : "^8.2",
+    "php": "^8.2",
     "guzzlehttp/guzzle": "^7.9",
-    "nesbot/carbon"    : "^3.8",
+    "nesbot/carbon": "^3.8",
     "stripe/stripe-php": "^16.5",
-    "vimeo/vimeo-api"  : "^3.0"
+    "twilio/sdk": "^8.3",
+    "vimeo/vimeo-api": "^3.0"
   },
   "require-dev" : {
     "pestphp/pest"    : "^3.7",
