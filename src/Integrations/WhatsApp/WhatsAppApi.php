@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Code\Integrations\WhatsApp;
+namespace Cravens\Php\Integrations\WhatsApp;
 
 use Cravens\Php\Utilities\GenericResult;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Http;
 
 class WhatsAppApi
 {
