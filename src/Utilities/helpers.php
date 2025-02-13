@@ -3,6 +3,23 @@
 use Cravens\Php\Utilities\AlertHelper;
 use Cravens\Php\Utilities\I18n\I18nHelper;
 
+if ( ! function_exists( '__x' ) )
+{
+	function __x( string $text = null )
+	{
+		if ( is_null( $text ) )
+		{
+			return $text;
+		}
+
+		if ( function_exists( 'app' ) )
+		{
+			$translator = app( Translate::class );
+
+			return $translator->translate( $text );
+		}
+	}
+}
 
 if ( ! function_exists( 'cost' ) )
 {
