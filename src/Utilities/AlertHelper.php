@@ -92,16 +92,17 @@ class AlertHelper
 		return $this;
 	}
 
+	public function config(): array
+	{
+		return $this->config;
+	}
+
 	private function flashConfig(): void
 	{
 		if ( function_exists( 'session' ) )
 		{
-			session()->flash( "sweet_alert", $this->buildConfig() );
+			$config_str = json_encode( $this->config() );
+			session()->flash( "sweet_alert", $config_str );
 		}
-	}
-
-	private function buildConfig(): false|string
-	{
-		return json_encode( $this->config );
 	}
 }

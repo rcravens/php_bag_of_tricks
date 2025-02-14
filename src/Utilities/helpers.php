@@ -50,19 +50,14 @@ if ( ! function_exists( 'alert' ) )
 {
 	function alert( $title = null, $message = null )
 	{
-		if ( function_exists( 'app' ) )
+		$alert = new AlertHelper();
+
+		if ( func_num_args() == 0 )
 		{
-			$alert = app( AlertHelper::class );
-
-			if ( func_num_args() == 0 )
-			{
-				return $alert;
-			}
-
-			return $alert->info( $title, $message );
+			return $alert;
 		}
 
-		return null;
+		return $alert->info( $title, $message );
 	}
 }
 
