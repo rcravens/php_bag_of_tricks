@@ -53,7 +53,7 @@ class I18nHelper
 		$key       = 'i18n_countries';
 		$countries = self::cache_get_value( $key );
 
-		if ( ! is_null( $countries ) )
+		if ( is_null( $countries ) )
 		{
 			$raw = file_get_contents( __DIR__ . '/countries.json' );
 			$raw = preg_replace( '/^\xEF\xBB\xBF/', '', $raw );
@@ -68,7 +68,7 @@ class I18nHelper
 
 	public static function country_by_code( $code ): ?object
 	{
-		if ( ! array_key_exists( $code, self::countries() ) )
+		if ( ! property_exists( self::countries(), $code ) )
 		{
 			return null;
 		}
@@ -97,7 +97,7 @@ class I18nHelper
 			return [];
 		}
 
-		return $country->states;
+		return (array) $country->states;
 	}
 
 	public static function cost_str( string $currency_code, float $amount = 0 ): string
