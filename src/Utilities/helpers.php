@@ -19,6 +19,8 @@ if ( ! function_exists( '__x' ) )
 
 			return $translator->translate( $text );
 		}
+
+		return $text;
 	}
 }
 
