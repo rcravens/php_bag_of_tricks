@@ -11,11 +11,12 @@ class StringHelpers
 			return $str;
 		}
 
+		$num_start_chars = $max_length - strlen( $spacer );
 		if ( $num_end_chars == 0 )
 		{
-			return substr( $str, 0, $max_length ) . $spacer;
+			return substr( $str, 0, $num_start_chars ) . $spacer;
 		}
 
-		return substr( $str, 0, $max_length - $num_end_chars ) . $spacer . substr( $str, - $num_end_chars );
+		return substr( $str, 0, $num_start_chars - $num_end_chars ) . $spacer . substr( $str, - $num_end_chars );
 	}
 }
