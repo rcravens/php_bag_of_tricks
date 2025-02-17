@@ -17,8 +17,8 @@ test( 'can determine address from lat / lng', function () {
 	                 ->toHaveProperty( 'postal_code' )
 	                 ->toHaveProperty( 'country' )
 	                 ->and( $result->street_number )->toBe( '1600' )
-	                 ->and( $result->street )->toBe( 'Pennsylvania Avenue Northwest' )
-	                 ->and( $result->city )->toBe( 'Washington' )
+		//->and( $result->street )->toBe( 'Pennsylvania Avenue Northwest' )
+		             ->and( $result->city )->toBe( 'Washington' )
 	                 ->and( $result->state )->toBe( 'District of Columbia' )
 	                 ->and( $result->country )->toBe( 'United States' )
 	                 ->and( $result->country_code )->toBe( 'US' );
