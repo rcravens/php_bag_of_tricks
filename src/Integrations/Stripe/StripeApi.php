@@ -182,4 +182,88 @@ class StripeApi
 
 		return $result;
 	}
+
+	public function create_connected_account(): GenericResult
+	{
+		try
+		{
+			$account = $this->client->accounts->create( [
+				                                            'controller' => [
+					                                            'stripe_dashboard' => [
+						                                            'type' => 'express',
+					                                            ],
+					                                            'fees'             => [
+						                                            'payer' => 'application'
+					                                            ],
+					                                            'losses'           => [
+						                                            'payments' => 'application'
+					                                            ],
+				                                            ],
+			                                            ] );
+
+			return GenericResult::data( $account );
+		}
+		catch( Exception $e )
+		{
+			return GenericResult::data( $e->getMessage() );
+		}
+	}
+
+	public function generate_account_link( string $connected_account_id, string $refresh_url, string $return_url ): GenericResult
+	{
+		try
+		{
+			$account_link = $this->client->accountLinks->create( [
+				                                                     'account'     => $connected_account_id,
+				                                                     'return_url'  => $return_url,
+				                                                     'refresh_url' => $refresh_url,
+				                                                     'type'        => 'account_onboarding',
+			                                                     ] );
+
+			return GenericResult::data( $account_link );
+		}
+		catch( Exception $e )
+		{
+			return GenericResult::data( $e->getMessage() );
+		}
+	}
+
+	public function get_charge( string $payment_intent_id ): GenericResult
+	{
+		try
+		{
+			$payment_intent = $this->client->paymentIntents->retrieve( $payment_intent_id, [ 'expand' => [ 'charges.data' ] ] );
+
+			return GenericResult::data( $payment_intent->latest_charge );
+		}
+		catch( Exception $e )
+		{
+			return GenericResult::data( $e->getMessage() );
+		}
+	}
+
+	public function transfer_to_connected_account( string $connected_account_id, int $amount_in_cents, string $currency, string $original_transaction_id ): GenericResult
+	{
+		$get_charge_response = $this->get_charge( $original_transaction_id );
+		if ( $get_charge_response->is_error )
+		{
+			return $get_charge_response;
+		}
+		$charge_id = $get_charge_response->data;
+		try
+		{
+			$transfer_response = $this->client->transfers->create( [
+				                                                       'amount'             => $amount_in_cents,
+				                                                       'currency'           => $currency,
+				                                                       'destination'        => $connected_account_id,
+				                                                       'source_transaction' => $charge_id,
+			                                                       ] );
+
+			return GenericResult::data( $transfer_response );
+		}
+		catch( Exception $e )
+		{
+			return GenericResult::error( $e->getMessage() );
+		}
+	}
 }
