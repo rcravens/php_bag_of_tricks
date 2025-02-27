@@ -84,7 +84,7 @@ class OpenPixApi
 				return GenericResult::error( $response->getStatusCode() );
 			}
 
-			$data = json_decode( $response->getBody(), true );
+			$data = json_decode( $response->getBody(), false );
 
 			return GenericResult::data( $data );
 		}
