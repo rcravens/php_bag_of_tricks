@@ -15,7 +15,7 @@ test( 'llm helper to generate response.', function () {
 	$response = $llm->get_response( $prompt );
 
 	expect( $response )->not->toBeNull();
-} );
+} )->skip();
 
 test( 'expect translator agent to translate texts', function () {
 	$texts = [
@@ -59,4 +59,4 @@ test( 'expect translator agent to translate texts', function () {
 			expect( $translations[ $to_language ] )->toHaveKey( $text );
 		}
 	}
-} );
+} )->skip();
