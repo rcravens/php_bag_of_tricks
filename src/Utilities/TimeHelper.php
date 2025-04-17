@@ -50,4 +50,18 @@ class TimeHelper
 
 		return count( $parts ) > 0 ? implode( ':', $parts ) : 'none';
 	}
+
+	public function to_hours( int $num_decimals = 1 ): string
+	{
+		$total_hours = $this->total_seconds / ( 60 * 60 );
+
+		return number_format( $total_hours, $num_decimals ) . ' hrs';
+	}
+
+	public function to_minutes( int $num_decimals = 1 ): string
+	{
+		$total_minutes = $this->total_seconds / ( 60 );
+
+		return number_format( $total_minutes, $num_decimals ) . ' mins';
+	}
 }
