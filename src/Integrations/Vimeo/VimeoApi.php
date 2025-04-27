@@ -239,8 +239,10 @@ class VimeoApi
 		try
 		{
 			$response     = $this->client->request( '/me/videos', [
-				'per_page' => $page_size,
-				'page'     => $page,
+				'per_page'  => $page_size,
+				'page'      => $page,
+				'sort'      => 'date',
+				'direction' => 'desc',
 			],                                      'GET' );
 			$result->data = (object) $response[ 'body' ] ?? [];
 		}
